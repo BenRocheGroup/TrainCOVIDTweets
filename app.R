@@ -6,6 +6,10 @@ load_tweets <- function() {
     readRDS("covidtweets_2020-10-15.rds")
 }
 
+censor_names <- function(text) {
+    gsub("@\\w+", "@█████", text)
+}
+
 list_topics <- c("Topic 1" = "topic1",
                  "Topic 2" = "topic2",
                  "Topic 3" = "topic3",
@@ -78,7 +82,7 @@ server <- function(input, output, session) {
         d <- sample(nrow(alltweets), 1)
 
         output$twtext <- renderUI({
-                alltweets$texte[d]
+                censor_names(alltweets$texte[d])
         })
 
         # Save result in an easily readable format
