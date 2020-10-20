@@ -12,6 +12,10 @@
   border-color: green;
 }
 
+.irs-min, .irs-max, .irs-from, .irs-to {
+  visibility: hidden !important;
+}
+
 /* From https://raw.githubusercontent.com/gadenbuie/tweet-conf-dash/553fce13a2af723182de142714728bf28e61c5de/www/custom.css */
 
 blockquote.twitter-tweet {

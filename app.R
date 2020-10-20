@@ -25,19 +25,15 @@ ui <- fluidPage(
     fluidRow(
 
         column(6,
-            checkboxGroupButtons(
-               "topics", "Topics",
-               list_topics,
-               justified = TRUE, status = "primary",
-               checkIcon = list(yes = icon("ok", lib = "glyphicon"),
-                                no = icon("remove", lib = "glyphicon"))
-            ),
-            sliderTextInput(
-               "feeling", "Sentiment:",
-               choices = c("Negative", "Neutral", "Positive"),
-               selected = "Neutral",
-               force_edges = TRUE
-            ),
+            lapply(seq_along(list_topics), function(i) {
+                sliderTextInput(
+                    list_topics[i], names(list_topics)[i],
+                    choices = c("Negative", "Neutral", "Positive", "N/A"),
+                    selected = "N/A",
+                    force_edges = TRUE,
+                    grid = TRUE
+                )
+            }),
             actionButton("do", "Next tweet",
                         width = "50%", class = "btn-primary btn-block"),
             ),
@@ -74,9 +70,9 @@ server <- function(input, output, session) {
     observeEvent(input$do, ignoreNULL = FALSE, {
 
         # Reset UI state
-        updateCheckboxGroupButtons(session, "topics", selected = character(0))
-
-        updateSliderTextInput(session, "feeling", selected = "Neutral")
+        for (i in list_topics) {
+            updateSliderTextInput(session, i, selected = "N/A")
+        }
 
         # Select and display tweet
         d <- sample(nrow(alltweets), 1)
@@ -86,13 +82,13 @@ server <- function(input, output, session) {
         })
 
         # Save result in an easily readable format
-        topics_tf <- list_topics %in% input$topics
-
-        write(
-            paste(c(alltweets$id[d], topics_tf, input$feeling), collapse = ","),
-            file = outfile,
-            append = TRUE
-        )
+        # topics_tf <- list_topics %in% input$topics
+        #
+        # write(
+        #     paste(c(alltweets$id[d], topics_tf, input$feeling), collapse = ","),
+        #     file = outfile,
+        #     append = TRUE
+        # )
 
     })
 
