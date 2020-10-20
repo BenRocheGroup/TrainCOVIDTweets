@@ -63,7 +63,7 @@ server <- function(input, output, session) {
     outfile <- paste0(file.path(outdate, user_id), ".csv")
 
     write(
-        paste(c("id", list_topics, "feeling"), collapse = ","),
+        paste(c("id", list_topics), collapse = ","),
         file = outfile
     )
 
@@ -82,13 +82,13 @@ server <- function(input, output, session) {
         })
 
         # Save result in an easily readable format
-        # topics_tf <- list_topics %in% input$topics
-        #
-        # write(
-        #     paste(c(alltweets$id[d], topics_tf, input$feeling), collapse = ","),
-        #     file = outfile,
-        #     append = TRUE
-        # )
+        topics_feelings <- vapply(list_topics, function(i) input[[i]], character(1))
+
+        write(
+            paste(c(alltweets$id[d], topics_feelings), collapse = ","),
+            file = outfile,
+            append = TRUE
+        )
 
     })
 
