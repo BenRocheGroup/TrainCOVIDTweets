@@ -31,10 +31,6 @@ list_topics <- tribble(
     "topic5", "Impacts sociétaux", bullet_list("Impacts économiques", "Inégalités sociales (santé, scolaires…)", "Tension hospitalière et impact sur les soignants", "Déprogrammations hospitalières", "Ruptures de stock", "Achats de panique", "Racisme", "Santé mentale (ennui, stress, solitude, dépression, anxiété)")
 )
 
-
-text_intro <- scan("text_intro.txt", character(), sep = "\n",
-                   quiet = TRUE, encoding = "UTF-8")
-
 ui <- fluidPage(
 
     includeCSS("extra.css"),
@@ -45,7 +41,7 @@ ui <- fluidPage(
 
         column(12,
                wellPanel(
-                   lapply(text_intro, p)
+                   includeMarkdown("text_intro.md"),
                )
         ),
         column(6,
