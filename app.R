@@ -1,11 +1,8 @@
 library(shiny)
 library(shinyWidgets)
-library(shinycssloaders)
 library(shinyBS)
 
-load_tweets <- function() {
-    readRDS("covidtweets_2020-10-15.rds")
-}
+alltweets <- readRDS("covidtweets_2020-10-15.rds")
 
 censor_names <- function(text) {
     gsub("@\\w+", "@█████", text)
@@ -44,11 +41,10 @@ ui <- fluidPage(
         ),
         column(6,
                h3("Tweet à classer:"),
-               withSpinner(
-                   htmlOutput("twtext",
-                              container = tags$blockquote,
-                              class = "twitter-tweet"),
-               ),
+               htmlOutput("twtext",
+                          container = tags$blockquote,
+                          class = "twitter-tweet"),
+               br(),
                actionButton("cancel", "Ce tweet ne parle pas du COVID-19", class = "btn-warning"),
         ),
         column(6,
@@ -72,8 +68,6 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
-
-    alltweets <- load_tweets()
 
     user_id <- stringi::stri_rand_strings(1, 10)
 
