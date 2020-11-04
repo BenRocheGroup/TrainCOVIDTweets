@@ -1,6 +1,7 @@
 library(shiny)
 library(shinyWidgets)
 library(shinycssloaders)
+library(shinyBS)
 
 load_tweets <- function() {
     readRDS("covidtweets_2020-10-15.rds")
@@ -54,7 +55,7 @@ ui <- fluidPage(
             lapply(seq_along(list_topics$id), function(i) {
                 sliderTextInput(
                     list_topics$id[i],
-                    span(tagList(list_topics$label[i], icon_with_title("question-circle", title = list_topics$description[i]))),
+                    span(tagList(list_topics$label[i], tipify(icon("question-circle"), title = list_topics$description[i], placement = "right"))),
                     choices = c("Négatif", "Neutre", "Positif", "N/A"),
                     selected = "N/A",
                     force_edges = TRUE,
