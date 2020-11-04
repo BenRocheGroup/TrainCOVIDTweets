@@ -64,7 +64,10 @@ ui <- fluidPage(
                 sliderTextInput(
                     list_topics$id[i],
                     span(tagList(list_topics$label[i], tipify(icon("question-circle"), title = list_topics$description[i], placement = "right"))),
-                    choices = c("Négatif", "Neutre", "Positif", "N/A"),
+                    choices = c("Negative" = "<div class='text-danger'>Négatif</div>",
+                                "Neutral" = "<div class='text-info'>Neutre</div>",
+                                "Positive" = "<div class='text-success'>Positif</div>",
+                                "N/A"),
                     selected = "N/A",
                     force_edges = TRUE,
                     grid = TRUE,
