@@ -16,15 +16,21 @@ icon_with_title <- function(..., title) {
     return(i)
 }
 
+bullet_list <- function(...) {
+    paste("&bull;", paste(..., sep = "<br> &bull; "))
+}
+
+
 library(dplyr)
 list_topics <- tribble(
     ~ id, ~ label, ~ description,
-    "topic1", "Diffusion et propagation de la maladie", "Foyers et zones de circulation, niveaux de risque, chiffres en France et dans le monde : décès, hospitalisations, cas, situation épidémiologique, modélisation",
-    "topic2", "Connaissance de la maladie", "Origine du virus, de la maladie (y compris les hypothèses discutées : Bill Gates, 5G…), mode de transmission, symptômes (dont asymptomatiques), évolution et mutation du virus",
-    "topic3", "Mesures de contrôle, action gouvernementale", "Confinement, quarantaine , couvre-feu, masques, fermetures (école, magasins, bar…), télétravail, distanciation sociale, attestations de déplacement, gel HA, application de suivi (StopCovid, TousAntiCovid), aides aux entreprises",
-    "topic4", "Prise en charge et traitement", "Dépistage (tests, stratégie), médicaments, protocoles thérapeutiques, vaccin",
-    "topic5", "Impacts sociétaux",  "Impacts économiques, inégalités sociales (santé, scolaires…), tension hospitalière et impact sur les soignants, déprogrammations hospitalières, ruptures de stock, achats de panique, racisme, santé mentale (ennui, stress, solitude, dépression, anxiété)"
+    "topic1", "Diffusion et propagation de la maladie", bullet_list("Foyers et zones de circulation", "Niveaux de risque", "Chiffres en France et dans le monde : décès, hospitalisations, cas, situation épidémiologique", "Modélisation"),
+    "topic2", "Connaissance de la maladie", bullet_list("Origine du virus, de la maladie (y compris les hypothèses discutées : Bill Gates, 5G…)", "Mode de transmission", "Symptômes (dont asymptomatiques)", "Évolution et mutation du virus"),
+    "topic3", "Mesures de contrôle, action gouvernementale", bullet_list("Confinement", "Quarantaine", "Couvre-feu", "Masques", "Fermetures (école, magasins, bar…)", "télétravail", "distanciation sociale", "attestations de déplacement", "gel hydro-alcoolique", "application de suivi (StopCovid, TousAntiCovid)", "aides aux entreprises"),
+    "topic4", "Prise en charge et traitement", bullet_list("Dépistage (tests, stratégie)", "Médicaments", "Protocoles thérapeutiques", "Vaccin"),
+    "topic5", "Impacts sociétaux", bullet_list("Impacts économiques", "Inégalités sociales (santé, scolaires…)", "Tension hospitalière et impact sur les soignants", "Déprogrammations hospitalières", "Ruptures de stock", "Achats de panique", "Racisme", "Santé mentale (ennui, stress, solitude, dépression, anxiété)")
 )
+
 
 text_intro <- scan("text_intro.txt", character(), sep = "\n",
                    quiet = TRUE, encoding = "UTF-8")
