@@ -41,6 +41,15 @@ ui <- fluidPage(
 
         column(12,
                wellPanel(
+                   fluidRow(
+                       column(6,
+                              img(src="logo_IRD.png", width = "50%"),
+                       ),
+                       column(6,
+                              img(src="logo_ANR.svg", width = "50%"),
+                       ),
+                   ),
+                   br(),
                    includeMarkdown("text_intro.md"),
                )
         ),
