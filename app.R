@@ -2,7 +2,7 @@ library(shiny)
 library(shinyWidgets)
 library(shinyBS)
 
-alltweets <- readRDS("covidtweets_2020-10-15.rds")
+alltweets <- readRDS("covidtweets.rds")
 
 censor_names <- function(text) {
     gsub("@\\w+", "@█████", text)
