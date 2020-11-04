@@ -87,7 +87,7 @@ server <- function(input, output, session) {
     observeEvent(input$do, ignoreNULL = FALSE, {
 
         # Reset UI state
-        for (i in list_topics) {
+        for (i in list_topics$id) {
             updateSliderTextInput(session, i, selected = "N/A")
         }
 
@@ -112,7 +112,7 @@ server <- function(input, output, session) {
     observeEvent(input$skip, ignoreNULL = FALSE, {
 
         # Reset UI state
-        for (i in list_topics) {
+        for (i in list_topics$id) {
             updateSliderTextInput(session, i, selected = "N/A")
         }
 
@@ -137,7 +137,7 @@ server <- function(input, output, session) {
     observeEvent(input$cancel, ignoreNULL = FALSE, {
 
         # Reset UI state
-        for (i in list_topics) {
+        for (i in list_topics$id) {
             updateSliderTextInput(session, i, selected = "N/A")
         }
 
