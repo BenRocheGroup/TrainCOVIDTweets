@@ -20,10 +20,13 @@ html {
   border-color: green;
 }
 
-.irs-min, .irs-max, .irs-from, .irs-to {
+.irs-min, .irs-max, .irs-from, .irs-to, .irs-single {
   visibility: hidden !important;
 }
 
+.irs-grid-text {
+  font-size: 10pt;
+}
 /* From https://raw.githubusercontent.com/gadenbuie/tweet-conf-dash/553fce13a2af723182de142714728bf28e61c5de/www/custom.css */
 
 blockquote.twitter-tweet {
