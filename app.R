@@ -20,6 +20,10 @@ bullet_list <- function(...) {
     paste("&bull;", paste(..., sep = "<br> &bull; "))
 }
 
+if (!dir.exists("out")) {
+    dir.create("out")
+}
+
 
 library(dplyr)
 list_topics <- tribble(
