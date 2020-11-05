@@ -37,7 +37,7 @@ ui <- fluidPage(
 
     fluidRow(
 
-        column(12,
+        column(6,
                wellPanel(
                    fluidRow(
                        column(6,
@@ -58,25 +58,22 @@ ui <- fluidPage(
                           class = "twitter-tweet"),
                br(),
                actionButton("cancel", "Ce tweet ne parle pas du COVID-19", class = "btn-warning"),
-        ),
-        column(6,
-            lapply(seq_along(list_topics$id), function(i) {
-                sliderTextInput(
-                    list_topics$id[i],
-                    span(tagList(list_topics$label[i], tipify(icon("question-circle"), title = list_topics$description[i], placement = "right"))),
-                    choices = c("Negative" = "<div class='text-danger'>Négatif</div>",
-                                "Neutral" = "<div class='text-info'>Neutre</div>",
-                                "Positive" = "<div class='text-success'>Positif</div>",
-                                "N/A"),
-                    selected = "N/A",
-                    force_edges = TRUE,
-                    grid = TRUE,
-                    width = "100%"
-                )
-            }),
-           actionButton("skip", "Aucun thème ne convient"),
-           actionButton("do", "Valider", class = "btn-success"),
-
+                lapply(seq_along(list_topics$id), function(i) {
+                    sliderTextInput(
+                        list_topics$id[i],
+                        span(tagList(list_topics$label[i], tipify(icon("question-circle"), title = list_topics$description[i], placement = "right"))),
+                        choices = c("Negative" = "<div class='text-danger'>Négatif</div>",
+                                    "Neutral" = "<div class='text-info'>Neutre</div>",
+                                    "Positive" = "<div class='text-success'>Positif</div>",
+                                    "N/A"),
+                        selected = "N/A",
+                        force_edges = TRUE,
+                        grid = TRUE,
+                        width = "100%"
+                    )
+                }),
+               actionButton("skip", "Aucun thème ne convient"),
+               actionButton("do", "Valider", class = "btn-success"),
         ),
     )
 
