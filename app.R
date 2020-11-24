@@ -63,17 +63,15 @@ ui <- fluidPage(
                br(),
                actionButton("cancel", "Ce tweet ne parle pas du COVID-19", class = "btn-warning"),
                 lapply(seq_along(list_topics$id), function(i) {
-                    sliderTextInput(
+                    radioButtons(
                         list_topics$id[i],
                         span(tagList(list_topics$label[i], tipify(icon("question-circle"), title = list_topics$description[i], placement = "right"))),
                         choices = c("Negative" = "<div class='text-danger'>Négatif</div>",
                                     "Neutral" = "<div class='text-info'>Neutre</div>",
-                                    "Positive" = "<div class='text-success'>Positif</div>",
-                                    "N/A"),
-                        selected = "N/A",
-                        force_edges = TRUE,
-                        grid = TRUE,
-                        width = "100%"
+                                    "Positive" = "<div class='text-success'>Positif</div>"),
+                        selected = character(0),
+                        width = "100%",
+                        inline = TRUE
                     )
                 }),
                actionButton("skip", "Aucun thème ne convient"),
@@ -115,7 +113,13 @@ server <- function(input, output, session) {
         })
 
         # Save result in an easily readable format
-        topics_feelings <- vapply(list_topics$id, function(i) input[[i]], character(1))
+        topics_feelings <- vapply(list_topics$id, function(i) {
+            c <- input[[i]]
+            if (length(c) == 0) {
+                c <- ""
+            }
+            return(c)
+        }, character(1))
 
         write(
             paste(c(alltweets$id[d], topics_feelings), collapse = ","),
