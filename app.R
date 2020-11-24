@@ -105,7 +105,7 @@ server <- function(input, output, session) {
         censor_names(alltweets$texte[d])
     })
 
-    observeEvent(input$do, ignoreNULL = FALSE, {
+    observeEvent(input$do, {
 
         # Save result in an easily readable format
         topics_feelings <- vapply(list_topics$id, function(i) {
@@ -128,7 +128,7 @@ server <- function(input, output, session) {
         }
 
         # Select and display tweet
-        d <- sample(nrow(alltweets), 1)
+        d <<- sample(nrow(alltweets), 1)
 
         output$twtext <- renderUI({
             censor_names(alltweets$texte[d])
@@ -136,7 +136,7 @@ server <- function(input, output, session) {
 
     })
 
-    observeEvent(input$skip, ignoreNULL = FALSE, {
+    observeEvent(input$skip, {
 
         # Save result in an easily readable format
         topics_feelings <- rep_len("N/A", length(list_topics$id))
@@ -153,7 +153,7 @@ server <- function(input, output, session) {
         }
 
         # Select and display tweet
-        d <- sample(nrow(alltweets), 1)
+        d <<- sample(nrow(alltweets), 1)
 
         output$twtext <- renderUI({
             censor_names(alltweets$texte[d])
@@ -161,7 +161,7 @@ server <- function(input, output, session) {
 
     })
 
-    observeEvent(input$cancel, ignoreNULL = FALSE, {
+    observeEvent(input$cancel, {
 
         # Save result in an easily readable format
         topics_feelings <- rep_len("OT", length(list_topics$id))
@@ -178,7 +178,7 @@ server <- function(input, output, session) {
         }
 
         # Select and display tweet
-        d <- sample(nrow(alltweets), 1)
+        d <<- sample(nrow(alltweets), 1)
 
         output$twtext <- renderUI({
             censor_names(alltweets$texte[d])
