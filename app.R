@@ -66,9 +66,10 @@ ui <- fluidPage(
                     radioButtons(
                         list_topics$id[i],
                         span(tagList(list_topics$label[i], tipify(icon("question-circle"), title = list_topics$description[i], placement = "right"))),
-                        choices = c("Negative" = "<div class='text-danger'>Négatif</div>",
-                                    "Neutral" = "<div class='text-info'>Neutre</div>",
-                                    "Positive" = "<div class='text-success'>Positif</div>"),
+                        choiceNames = list(HTML("<div class='text-danger'>Négatif</div>"),
+                                           HTML("<div class='text-info'>Neutre</div>"),
+                                           HTML("<div class='text-success'>Positif</div>")),
+                        choiceValues = c("Negative", "Neutral", "Positive"),
                         selected = character(0),
                         width = "100%",
                         inline = TRUE
