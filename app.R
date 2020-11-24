@@ -98,19 +98,14 @@ server <- function(input, output, session) {
         file = outfile
     )
 
+    # Select and display tweet
+    d <- sample(nrow(alltweets), 1)
+
+    output$twtext <- renderUI({
+        censor_names(alltweets$texte[d])
+    })
+
     observeEvent(input$do, ignoreNULL = FALSE, {
-
-        # Reset UI state
-        for (i in list_topics$id) {
-            updateSliderTextInput(session, i, selected = "N/A")
-        }
-
-        # Select and display tweet
-        d <- sample(nrow(alltweets), 1)
-
-        output$twtext <- renderUI({
-                censor_names(alltweets$texte[d])
-        })
 
         # Save result in an easily readable format
         topics_feelings <- vapply(list_topics$id, function(i) {
@@ -127,13 +122,9 @@ server <- function(input, output, session) {
             append = TRUE
         )
 
-    })
-
-    observeEvent(input$skip, ignoreNULL = FALSE, {
-
         # Reset UI state
         for (i in list_topics$id) {
-            updateSliderTextInput(session, i, selected = "N/A")
+            updateRadioButtons(session, i, selected = character(0))
         }
 
         # Select and display tweet
@@ -142,6 +133,10 @@ server <- function(input, output, session) {
         output$twtext <- renderUI({
             censor_names(alltweets$texte[d])
         })
+
+    })
+
+    observeEvent(input$skip, ignoreNULL = FALSE, {
 
         # Save result in an easily readable format
         topics_feelings <- rep_len("N/A", length(list_topics$id))
@@ -152,13 +147,9 @@ server <- function(input, output, session) {
             append = TRUE
         )
 
-    })
-
-    observeEvent(input$cancel, ignoreNULL = FALSE, {
-
         # Reset UI state
         for (i in list_topics$id) {
-            updateSliderTextInput(session, i, selected = "N/A")
+            updateRadioButtons(session, i, selected = character(0))
         }
 
         # Select and display tweet
@@ -168,6 +159,10 @@ server <- function(input, output, session) {
             censor_names(alltweets$texte[d])
         })
 
+    })
+
+    observeEvent(input$cancel, ignoreNULL = FALSE, {
+
         # Save result in an easily readable format
         topics_feelings <- rep_len("OT", length(list_topics$id))
 
@@ -176,6 +171,18 @@ server <- function(input, output, session) {
             file = outfile,
             append = TRUE
         )
+
+        # Reset UI state
+        for (i in list_topics$id) {
+            updateRadioButtons(session, i, selected = character(0))
+        }
+
+        # Select and display tweet
+        d <- sample(nrow(alltweets), 1)
+
+        output$twtext <- renderUI({
+            censor_names(alltweets$texte[d])
+        })
 
     })
 
