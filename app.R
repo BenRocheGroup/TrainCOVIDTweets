@@ -112,23 +112,33 @@ server <- function(input, output, session) {
         # Save result in an easily readable format
         topics_feelings <- vapply(list_topics$id, function(i) input[[i]], character(1))
 
-        write(
-            paste(c(alltweets$id[d], topics_feelings), collapse = ","),
-            file = outfile,
-            append = TRUE
-        )
+        if (identical(unique(topics_feelings), "N/A")) {
+            show_alert(
+                title = "Erreur",
+                text = 'Sélectionnez au moins un thème avec une perception négative/neutre/positive ou cliquez sur le bouton "Aucun thème ne convient"',
+                type = "error"
+            )
+        } else {
 
-        # Reset UI state
-        for (i in list_topics$id) {
-            updateSliderTextInput(session, i, selected = "N/A")
+            write(
+                paste(c(alltweets$id[d], topics_feelings), collapse = ","),
+                file = outfile,
+                append = TRUE
+            )
+
+            # Reset UI state
+            for (i in list_topics$id) {
+                updateSliderTextInput(session, i, selected = "N/A")
+            }
+
+            # Select and display tweet
+            d <<- sample(nrow(alltweets), 1)
+
+            output$twtext <- renderUI({
+                censor_names(alltweets$texte[d])
+            })
+
         }
-
-        # Select and display tweet
-        d <<- sample(nrow(alltweets), 1)
-
-        output$twtext <- renderUI({
-            censor_names(alltweets$texte[d])
-        })
 
     })
 
