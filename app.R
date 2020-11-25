@@ -62,19 +62,20 @@ ui <- fluidPage(
                           class = "twitter-tweet"),
                br(),
                actionButton("cancel", "Ce tweet ne parle pas du COVID-19", class = "btn-warning"),
-                lapply(seq_along(list_topics$id), function(i) {
-                    radioButtons(
-                        list_topics$id[i],
-                        span(tagList(list_topics$label[i], tipify(icon("question-circle"), title = list_topics$description[i], placement = "right"))),
-                        choiceNames = list(HTML("<div class='text-danger'>Négatif</div>"),
-                                           HTML("<div class='text-info'>Neutre</div>"),
-                                           HTML("<div class='text-success'>Positif</div>")),
-                        choiceValues = c("Negative", "Neutral", "Positive"),
-                        selected = character(0),
-                        width = "100%",
-                        inline = TRUE
-                    )
-                }),
+               lapply(seq_along(list_topics$id), function(i) {
+                   sliderTextInput(
+                       list_topics$id[i],
+                       span(tagList(list_topics$label[i], tipify(icon("question-circle"), title = list_topics$description[i], placement = "right"))),
+                       choices = c("Negative" = "<div class='text-danger'>Négatif</div>",
+                                   "Neutral" = "<div class='text-info'>Neutre</div>",
+                                   "Positive" = "<div class='text-success'>Positif</div>",
+                                   "N/A"),
+                       selected = "N/A",
+                       force_edges = TRUE,
+                       grid = TRUE,
+                       width = "100%"
+                   )
+               }),
                actionButton("skip", "Aucun thème ne convient"),
                actionButton("do", "Valider", class = "btn-success"),
         ),
@@ -109,13 +110,7 @@ server <- function(input, output, session) {
     observeEvent(input$do, {
 
         # Save result in an easily readable format
-        topics_feelings <- vapply(list_topics$id, function(i) {
-            c <- input[[i]]
-            if (length(c) == 0) {
-                c <- ""
-            }
-            return(c)
-        }, character(1))
+        topics_feelings <- vapply(list_topics$id, function(i) input[[i]], character(1))
 
         write(
             paste(c(alltweets$id[d], topics_feelings), collapse = ","),
@@ -125,7 +120,7 @@ server <- function(input, output, session) {
 
         # Reset UI state
         for (i in list_topics$id) {
-            updateRadioButtons(session, i, selected = character(0))
+            updateSliderTextInput(session, i, selected = "N/A")
         }
 
         # Select and display tweet
@@ -140,7 +135,7 @@ server <- function(input, output, session) {
     observeEvent(input$skip, {
 
         # Save result in an easily readable format
-        topics_feelings <- rep_len("N/A", length(list_topics$id))
+        topics_feelings <- rep_len("OtherTopic", length(list_topics$id))
 
         write(
             paste(c(alltweets$id[d], topics_feelings), collapse = ","),
@@ -150,7 +145,7 @@ server <- function(input, output, session) {
 
         # Reset UI state
         for (i in list_topics$id) {
-            updateRadioButtons(session, i, selected = character(0))
+            updateSliderTextInput(session, i, selected = "N/A")
         }
 
         # Select and display tweet
@@ -165,7 +160,7 @@ server <- function(input, output, session) {
     observeEvent(input$cancel, {
 
         # Save result in an easily readable format
-        topics_feelings <- rep_len("OT", length(list_topics$id))
+        topics_feelings <- rep_len("OffTopic", length(list_topics$id))
 
         write(
             paste(c(alltweets$id[d], topics_feelings), collapse = ","),
@@ -175,7 +170,7 @@ server <- function(input, output, session) {
 
         # Reset UI state
         for (i in list_topics$id) {
-            updateRadioButtons(session, i, selected = character(0))
+            updateSliderTextInput(session, i, selected = "N/A")
         }
 
         # Select and display tweet
