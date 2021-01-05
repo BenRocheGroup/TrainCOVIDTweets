@@ -27,12 +27,13 @@ if (!dir.exists("out")) {
 
 library(dplyr)
 list_topics <- tribble(
-    ~ id, ~ label, ~ description,
-    "topic1", "Diffusion et propagation de la maladie", bullet_list("Foyers et zones de circulation", "Niveaux de risque", "Chiffres en France et dans le monde : décès, hospitalisations, cas, situation épidémiologique", "Modélisation"),
-    "topic2", "Connaissance de la maladie", bullet_list("Origine du virus, de la maladie (y compris les hypothèses discutées&nbsp;: Bill Gates, 5G…)", "Mode de transmission", "Symptômes (dont asymptomatiques)", "Évolution et mutation du virus"),
-    "topic3", "Mesures de contrôle, action gouvernementale", bullet_list("Confinement", "Quarantaine", "Couvre-feu", "Masques", "Fermetures (école, magasins, bar…)", "télétravail", "distanciation sociale", "attestations de déplacement", "gel hydro-alcoolique", "application de suivi (StopCovid, TousAntiCovid)", "aides aux entreprises"),
-    "topic4", "Prise en charge et traitement", bullet_list("Dépistage (tests, stratégie)", "Médicaments", "Protocoles thérapeutiques", "Vaccin"),
-    "topic5", "Impacts sociétaux", bullet_list("Impacts économiques", "Inégalités sociales (santé, scolaires…)", "Tension hospitalière et impact sur les soignants", "Déprogrammations hospitalières", "Ruptures de stock", "Achats de panique", "Racisme", "Santé mentale (ennui, stress, solitude, dépression, anxiété)")
+    ~ id, ~ label, ~ choices,
+    "topic1", "Connaissance et propagation de la maladie", c("Rassuré", "Neutre", "Doute", "Inquiet"),
+    "topic2", "Mesures de contrôle, action gouvernementale", c("Adhésion à la mesure", "Neutre", "Incompréhension de la mesure", "Rejet de la mesure"),
+    "topic3", "Isolement des malades et des personnes contact", c("Adhésion à la mesure", "Neutre", "Incompréhension de la mesure", "Rejet de la mesure"),
+    "topic4", "Dépistage et traitement", c("Rassuré", "Neutre", "Doute", "Inquiet"),
+    "topic5", "Vaccination", c("Adhésion à la mesure", "Neutre", "Incompréhension de la mesure", "Rejet de la mesure"),
+    "topic6", "Impacts sociétaux", c("Positif", "Neutre", "Négatif")
 )
 
 ui <- fluidPage(
@@ -65,12 +66,9 @@ ui <- fluidPage(
                lapply(seq_along(list_topics$id), function(i) {
                    sliderTextInput(
                        list_topics$id[i],
-                       span(tagList(list_topics$label[i], tipify(icon("question-circle"), title = list_topics$description[i], placement = "right"))),
-                       choices = c("Negative" = "<div class='text-danger'>Négatif</div>",
-                                   "Neutral" = "<div class='text-info'>Neutre</div>",
-                                   "Positive" = "<div class='text-success'>Positif</div>",
-                                   "N/A"),
-                       selected = "N/A",
+                       list_topics$label[i],
+                       choices = list_topics$choices[[i]],
+                       selected = "Neutre",
                        force_edges = TRUE,
                        grid = TRUE,
                        width = "100%"
