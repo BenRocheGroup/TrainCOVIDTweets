@@ -1,4 +1,4 @@
-#### Epidémie de COVID-19 : soyez acteur de la recherche !
+### Epidémie de COVID-19 : soyez acteur de la recherche !
 
 Le projet DigEpi (pour Digital Epidemiology), financé par l'Agence Nationale pour la Recherche, a pour **objectif d'apprécier l'impact des perceptions de la population française exprimés sur twitter vis à vis de la pandémie actuelle de COVID-19**. Une fois ces perceptions identifiées et leur évolution au cours du temps quantifiée, nous souhaitons, au travers de modèles mathématiques et statistiques, comprendre comment ce type de données peut permettre d'alerter les autorités sanitaires de façon préventive sur une augmentation attendue de cas de coronavirus. Néanmoins, nous avons besoin d'apprendre à nos algorithmes comment classifier ces messages (c'est ce qu'on appelle l'apprentissage supervisé). **C'est pour cela que nous avons besoin de vous**.
 
