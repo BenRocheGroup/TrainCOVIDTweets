@@ -67,8 +67,8 @@ ui <- fluidPage(
                    sliderTextInput(
                        list_topics$id[i],
                        list_topics$label[i],
-                       choices = list_topics$choices[[i]],
-                       selected = "Neutre",
+                       choices = c(list_topics$choices[[i]], "N/A"),
+                       selected = "N/A",
                        force_edges = TRUE,
                        grid = TRUE,
                        width = "100%"
