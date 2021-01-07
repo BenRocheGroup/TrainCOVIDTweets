@@ -29,10 +29,10 @@ library(dplyr)
 list_topics <- tribble(
     ~ id, ~ label, ~ choices,
     "topic1", "Connaissance et propagation de la maladie", c("Rassuré", "Neutre", "Doute", "Inquiet"),
-    "topic2", "Mesures de contrôle, action gouvernementale", c("Adhésion à la mesure", "Neutre", "Incompréhension de la mesure", "Rejet de la mesure"),
-    "topic3", "Isolement des malades et des personnes contact", c("Adhésion à la mesure", "Neutre", "Incompréhension de la mesure", "Rejet de la mesure"),
+    "topic2", "Mesures de contrôle, action gouvernementale", c("Adhésion<br>à la mesure", "Neutre", "Incompréhension<br>de la mesure", "Rejet<br>de la mesure"),
+    "topic3", "Isolement des malades et des personnes contact", c("Adhésion<br>à la mesure", "Neutre", "Incompréhension<br>de la mesure", "Rejet<br>de la mesure"),
     "topic4", "Dépistage et traitement", c("Rassuré", "Neutre", "Doute", "Inquiet"),
-    "topic5", "Vaccination", c("Adhésion à la mesure", "Neutre", "Incompréhension de la mesure", "Rejet de la mesure"),
+    "topic5", "Vaccination", c("Adhésion<br>à la mesure", "Neutre", "Incompréhension<br>de la mesure", "Rejet<br>de la mesure"),
     "topic6", "Impacts sociétaux", c("Positif", "Neutre", "Négatif")
 )
 

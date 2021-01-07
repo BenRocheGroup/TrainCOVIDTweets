@@ -26,6 +26,8 @@ html {
 
 .irs-grid-text {
   font-size: 10pt;
+  line-height: 10pt;
+  top: 7px;
 }
 /* From https://raw.githubusercontent.com/gadenbuie/tweet-conf-dash/553fce13a2af723182de142714728bf28e61c5de/www/custom.css */
 
