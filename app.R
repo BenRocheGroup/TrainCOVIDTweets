@@ -27,14 +27,16 @@ if (!dir.exists("out")) {
 
 library(dplyr)
 list_topics <- tribble(
-    ~ id, ~ label, ~ choices,
-    "topic1", "Connaissance et propagation de la maladie", c("Rassuré", "Neutre", "Doute", "Inquiet"),
-    "topic2", "Mesures de contrôle, action gouvernementale", c("Adhésion<br>à la mesure", "Neutre", "Incompréhension<br>de la mesure", "Rejet<br>de la mesure"),
-    "topic3", "Isolement des malades et des personnes contact", c("Adhésion<br>à la mesure", "Neutre", "Incompréhension<br>de la mesure", "Rejet<br>de la mesure"),
-    "topic4", "Dépistage et traitement", c("Rassuré", "Neutre", "Doute", "Inquiet"),
-    "topic5", "Vaccination", c("Adhésion<br>à la mesure", "Neutre", "Incompréhension<br>de la mesure", "Rejet<br>de la mesure"),
-    "topic6", "Impacts sociétaux", c("Positif", "Neutre", "Négatif")
-)
+    ~ label, ~ choices,
+    "Connaissances et informations liées à la maladie/au virus", c("Confiance<br>Adhésion", "Neutre", "Nuancé", "Méfiance<br>Opposition"),
+    "Propagation de la maladie", c("Rassuré", "Neutre", "Doute", "Inquiet"),
+    "Mesures pour la distanciation physique (confinement, masques, isoloment, femetures…)", c("Adhésion<br>à la mesure", "Neutre", "Incompréhension<br>de la mesure", "Rejet<br>de la mesure"),
+    "Vaccination", c("Adhésion<br>à la mesure", "Neutre", "Incompréhension<br>de la mesure", "Rejet<br>de la mesure"),
+    "Action des pouvoirs publics (politique sanitaire, mise en œuvre des mesures, stratégie de dépistage…)", c("Confiance<br>Adhésion", "Neutre", "Nuancé", "Méfiance<br>Opposition"),
+    "Impact psychologique personnel (stress, anxiété, déprime, solitude…)", c("Positif", "Neutre", "Négatif"),
+    "Impact économique (perte de revenus, impossibilité de travailler…)", c("Positif", "Neutre", "Négatif")
+) %>%
+    mutate(id = paste0("topic", row_number()), .before = 1)
 
 ui <- fluidPage(
 
