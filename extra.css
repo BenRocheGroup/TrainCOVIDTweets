@@ -29,6 +29,11 @@ html {
   line-height: 10pt;
   top: 7px;
 }
+
+.irs-grid-pol.small {
+  display: none;
+}
+
 /* From https://raw.githubusercontent.com/gadenbuie/tweet-conf-dash/553fce13a2af723182de142714728bf28e61c5de/www/custom.css */
 
 blockquote.twitter-tweet {
