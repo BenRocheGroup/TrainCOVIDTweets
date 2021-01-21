@@ -31,8 +31,8 @@ list_topics <- tribble(
     "Connaissances et informations liées à la maladie/au virus", c("Confiance<br>Adhésion", "Neutre", "Nuancé", "Méfiance<br>Opposition"),
     "Propagation de la maladie", c("Rassuré", "Neutre", "Doute", "Inquiet"),
     "Mesures pour la distanciation physique (confinement, masques, isolement, femetures…)", c("Adhésion<br>à la mesure", "Neutre", "Incompréhension<br>de la mesure", "Rejet<br>de la mesure"),
-    "Vaccination", c("Adhésion<br>à la mesure", "Neutre", "Incompréhension<br>de la mesure", "Rejet<br>de la mesure"),
-    "Action des pouvoirs publics (politique sanitaire, mise en œuvre des mesures, stratégie de dépistage…)", c("Confiance<br>Adhésion", "Neutre", "Nuancé", "Méfiance<br>Opposition"),
+    "Vaccination", c("Adhésion<br>à la mesure", "Neutre", "Doute<br>Inquiétude", "Rejet<br>de la mesure"),
+    "Action des pouvoirs publics (politique sanitaire, mise en œuvre des mesures, stratégie de dépistage…)", c("Confiance<br>Adhésion", "Neutre", "Critique<br>Nuancé", "Méfiance<br>Opposition"),
     "Impact psychologique personnel (stress, anxiété, déprime, solitude…)", c("Positif", "Neutre", "Négatif"),
     "Impact économique (perte de revenus, impossibilité de travailler…)", c("Positif", "Neutre", "Négatif")
 ) %>%
